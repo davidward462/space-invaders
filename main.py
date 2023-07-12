@@ -4,10 +4,10 @@ import random
 
 pygame.init()
 
-window_Height = 600
-window_Width = 800
+WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 800
 
-window = pygame.display.set_mode( (window_Width, window_Height) )
+window = pygame.display.set_mode( (WINDOW_WIDTH, WINDOW_HEIGHT) )
 
 pygame.display.set_caption("Space Invaders")
 icon = pygame.image.load('favicon.ico')
@@ -30,10 +30,10 @@ def CreateEnemy(number, window_Width, window_Height, window):
 def main():
 
     # Create player
-    player = entities.Player(400, 500, white, window_Width, window_Height, window)
+    player = entities.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
 
     # Create enemies
-    enemies = CreateEnemy(3, window_Width, window_Height, window)
+    enemies = CreateEnemy(3, WINDOW_WIDTH, WINDOW_HEIGHT, window)
 
     # game loop
     run = True
