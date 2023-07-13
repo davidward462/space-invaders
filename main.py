@@ -19,23 +19,16 @@ pygame.display.set_icon(icon)
 white = (255, 255, 255)
 black = (0, 0, 0)
 
-def CreateEnemy(number, window_Width, window_Height, window):
-    enemyList = []
-    for i in range(0, number):
-        enemyX = random.randint(20, window_Width-20)
-        enemyY = random.randint(20, window_Height/10)
-        enemy = enemy.Enemy(enemyX, enemyY, white, window_Width, window_Height, window)
-        enemy.SetHorizDirection(1)
-        enemyList.append(enemy)
-    return enemyList
-
 def main():
 
-    # Create player
+    # Create player.
     playerObj = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
 
-    # Create list of enemies
+    # Create list of enemies that exist.
     enemyList = enemy.CreateEnemy(3, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+
+    # Create list of bullets that have been fired.
+    bulletList = []
 
     # game loop
     run = True
