@@ -1,6 +1,7 @@
 import pygame
 import player
 import enemy
+import bullet
 import random
 
 pygame.init()
@@ -55,6 +56,8 @@ def main():
                     thePlayer.SetVertDirection(1)
                 if event.key == pygame.K_d:
                     thePlayer.SetHorizDirection(1)
+                if event.key == pygame.K_SPACE:
+                    print(" shoot")
                 if event.key == pygame.K_r: # restart
                     main() # where does the previously allocated memory go?
             

@@ -33,8 +33,8 @@ class Enemy:
         self.vertDirection = 0
         self.horizDirection = 0
 
-        # Intended speed of the player
-        self.maxSpeed = 0.2
+        # Intended speed of the enemy
+        self.maxSpeed = 0.3
 
         self.color = color
 
@@ -56,7 +56,7 @@ class Enemy:
         # check if enemy should bounce
         if cx < 0 or cx >= self.windowWidth:
             hDir *= -1
-            cy += 20
+            cy += 30
 
         # update position based on speed and direction
         cx += hDir * self.maxSpeed
