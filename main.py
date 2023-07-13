@@ -32,10 +32,10 @@ def CreateEnemy(number, window_Width, window_Height, window):
 def main():
 
     # Create player
-    thePlayer = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
+    playerObj = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
 
-    # Create enemies
-    enemies = enemy.CreateEnemy(3, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    # Create list of enemies
+    enemyList = enemy.CreateEnemy(3, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # game loop
     run = True
@@ -49,13 +49,13 @@ def main():
             # when key is pressed down
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    thePlayer.SetVertDirection(-1)
+                    playerObj.SetVertDirection(-1)
                 if event.key == pygame.K_a:
-                    thePlayer.SetHorizDirection(-1)
+                    playerObj.SetHorizDirection(-1)
                 if event.key == pygame.K_s:
-                    thePlayer.SetVertDirection(1)
+                    playerObj.SetVertDirection(1)
                 if event.key == pygame.K_d:
-                    thePlayer.SetHorizDirection(1)
+                    playerObj.SetHorizDirection(1)
                 if event.key == pygame.K_SPACE:
                     print(" shoot")
                 if event.key == pygame.K_r: # restart
@@ -64,17 +64,17 @@ def main():
             # when key is released
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w:
-                    thePlayer.SetVertDirection(0)
+                    playerObj.SetVertDirection(0)
                 if event.key == pygame.K_a:
-                    thePlayer.SetHorizDirection(0)
+                    playerObj.SetHorizDirection(0)
                 if event.key == pygame.K_s:
-                    thePlayer.SetVertDirection(0)
+                    playerObj.SetVertDirection(0)
                 if event.key == pygame.K_d:
-                    thePlayer.SetHorizDirection(0)
+                    playerObj.SetHorizDirection(0)
 
         # Logic updates
-        thePlayer.Update()
-        for e in enemies:
+        playerObj.Update()
+        for e in enemyList:
             e.Update()
     
         # Graphical updates
@@ -83,8 +83,8 @@ def main():
         window.fill(black)
 
         # update the entire display
-        thePlayer.Draw()
-        for e in enemies:
+        playerObj.Draw()
+        for e in enemyList:
             e.Draw()
             
         pygame.display.flip()
