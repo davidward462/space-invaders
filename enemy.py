@@ -2,7 +2,7 @@ import pygame
 import math
 import random
 
-def CreateEnemy(number, window_Width, window_Height, window, color):
+def SpawnEnemy(number, window_Width, window_Height, window, color):
     enemyList = []
     for i in range(0, number):
         enemyX = random.randint(20, window_Width-20)
