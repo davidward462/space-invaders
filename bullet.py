@@ -1,8 +1,12 @@
 import pygame
 
+def SpawnBullet(x, y, color, windowWidth, windowHeight, surface):
+    newBullet = Bullet(x, y, color, windowWidth, windowHeight, surface)
+    return newBullet
+
 class Bullet:
 
-    def __init__(self, x, y, windowWidth, windowHeight, color):
+    def __init__(self, x, y, color, windowWidth, windowHeight, surface):
         self.x = x
         self.y = y
 
@@ -24,6 +28,10 @@ class Bullet:
         self.maxSpeed = 0.5
 
         self.color = color
+
+    def Update(self):
+        self.x = self.x
+        self.y = self.y
 
 
     def Draw(self):

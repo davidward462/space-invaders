@@ -50,7 +50,8 @@ def main():
                 if event.key == pygame.K_d:
                     playerObj.SetHorizDirection(1)
                 if event.key == pygame.K_SPACE:
-                    print(" shoot")
+                    newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
+                    bulletList.append(newBullet)
                 if event.key == pygame.K_r: # restart
                     main() # where does the previously allocated memory go?
             
@@ -67,8 +68,12 @@ def main():
 
         # Logic updates
         playerObj.Update()
+        
         for e in enemyList:
             e.Update()
+
+        for b in bulletList:
+            b.Update()
     
         # Graphical updates
             
@@ -77,8 +82,12 @@ def main():
 
         # update the entire display
         playerObj.Draw()
+
         for e in enemyList:
             e.Draw()
+
+        for b in bulletList:
+            b.Draw()
             
         pygame.display.flip()
 
