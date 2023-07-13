@@ -1,5 +1,16 @@
 import pygame
 import math
+import random
+
+def CreateEnemy(number, window_Width, window_Height, window, color):
+    enemyList = []
+    for i in range(0, number):
+        enemyX = random.randint(20, window_Width-20)
+        enemyY = random.randint(20, window_Height/10)
+        e = Enemy(enemyX, enemyY, color, window_Width, window_Height, window)
+        e.SetHorizDirection(1)
+        enemyList.append(e)
+    return enemyList
 
 class Enemy:
     def __init__(self, x, y, color, windowWidth, windowHeight, surface):
