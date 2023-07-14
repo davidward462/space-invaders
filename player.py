@@ -22,7 +22,7 @@ class Player:
         self.horizDirection = 0
 
         # Intended speed of the player
-        self.maxSpeed = 0.45
+        self.maxSpeed = 0.5
 
         # Current speed
         self.speed = 1
