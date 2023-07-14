@@ -58,13 +58,17 @@ def main():
             # when key is released
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_w:
-                    playerObj.SetVertDirection(0)
+                    if playerObj.vertDirection == -1:
+                        playerObj.SetVertDirection(0)
                 if event.key == pygame.K_a:
-                    playerObj.SetHorizDirection(0)
+                    if playerObj.horizDirection == -1:
+                        playerObj.SetHorizDirection(0)
                 if event.key == pygame.K_s:
-                    playerObj.SetVertDirection(0)
+                    if playerObj.vertDirection == 1:
+                        playerObj.SetVertDirection(0)
                 if event.key == pygame.K_d:
-                    playerObj.SetHorizDirection(0)
+                    if playerObj.horizDirection == 1:
+                        playerObj.SetHorizDirection(0)
 
         # Logic updates
         playerObj.Update()
