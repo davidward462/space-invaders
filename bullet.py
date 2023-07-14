@@ -21,7 +21,7 @@ class Bullet:
         
         # Direction can be 0, -1, or 1
         # The enemy is moving downwards.
-        self.vertDirection = 0
+        self.vertDirection = -1 
         self.horizDirection = 0
 
         # Intended speed of the player
@@ -30,12 +30,21 @@ class Bullet:
         self.color = color
 
     def Update(self):
-        self.x = self.x
-        self.y = self.y
+        cx = self.x
+        cy = self.y
+        vDir = self.vertDirection
+        hDir = self.horizDirection
 
+        # update position based on speed and direction
+        cx += hDir * self.maxSpeed
+        cy += vDir * self.maxSpeed
+
+        self.y = cy
+        self.x = cx
+        self.vertDirection = vDir
+        self.horizDirection = hDir
 
     def Draw(self):
         pygame.draw.circle(self.surface, self.color, (self.x, self.y), self.radius)
-
 
 

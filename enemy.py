@@ -8,7 +8,7 @@ def SpawnEnemy(number, window_Width, window_Height, window, color):
         enemyX = random.randint(20, window_Width-20)
         enemyY = random.randint(20, window_Height/10)
         e = Enemy(enemyX, enemyY, color, window_Width, window_Height, window)
-        e.SetHorizDirection(1)
+        e.SetHorizDirection(-1)
         enemyList.append(e)
     return enemyList
 

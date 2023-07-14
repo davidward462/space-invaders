@@ -50,7 +50,7 @@ def main():
                 if event.key == pygame.K_d:
                     playerObj.SetHorizDirection(1)
                 if event.key == pygame.K_SPACE:
-                    newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
+                    newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y-20, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
                     bulletList.append(newBullet)
                 if event.key == pygame.K_r: # restart
                     main() # where does the previously allocated memory go?
