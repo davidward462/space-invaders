@@ -25,7 +25,7 @@ class Bullet:
         self.horizDirection = 0
 
         # Intended speed of the player
-        self.maxSpeed = 0.8
+        self.maxSpeed = 1.0
 
         self.color = color
 

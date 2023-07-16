@@ -34,7 +34,7 @@ class Enemy:
         self.horizDirection = 0
 
         # Intended speed of the enemy
-        self.maxSpeed = 0.3
+        self.maxSpeed = 0.35
 
         self.color = color
 
