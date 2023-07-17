@@ -29,6 +29,14 @@ class Bullet:
 
         self.color = color
 
+    def IsOutOfBounds(self):
+        result = False
+        cx = self.x
+        cy = self.y
+        if cx < 0 or cx > self.windowWidth or cy < 0 or cy > self.windowHeight:
+            result = True
+        return result
+
     def Update(self):
         cx = self.x
         cy = self.y
