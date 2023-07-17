@@ -33,11 +33,12 @@ class Bullet:
         result = False
         cx = self.x
         cy = self.y
-        if cx < 0 or cx > self.windowWidth or cy < 0 or cy > self.windowHeight:
+        if cy < 0:
             result = True
         return result
 
     def Update(self):
+
         cx = self.x
         cy = self.y
         vDir = self.vertDirection

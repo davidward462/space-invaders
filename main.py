@@ -85,8 +85,17 @@ def main():
         for e in enemyList:
             e.Update()
 
+        updateIndex = 0
+        print(f"bullets {len(bulletList)}")
         for b in bulletList:
             b.Update()
+            outOfBounds = b.IsOutOfBounds()
+            if outOfBounds:
+                del bulletList[updateIndex]
+                continue
+            updateIndex = updateIndex + 1
+
+
     
         # Graphical updates
             
