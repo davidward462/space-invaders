@@ -19,6 +19,15 @@ pygame.display.set_icon(icon)
 white = (255, 255, 255)
 black = (0, 0, 0)
 
+def LinesIntersect(lineA, lineB):
+    result = False
+    return result
+
+def ObjectsCollide(objA, objB):
+    result = False
+    return result
+
+
 def main():
 
     # Create player.
