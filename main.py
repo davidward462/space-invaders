@@ -19,10 +19,12 @@ pygame.display.set_icon(icon)
 white = (255, 255, 255)
 black = (0, 0, 0)
 
+# Return true if the two given lines cross one another, false otherwise
 def LinesIntersect(lineA, lineB):
     result = False
     return result
 
+# Return true if the two given objects have collided with one another, false otherwise.
 def ObjectsCollide(objA, objB):
     result = False
     return result
@@ -86,16 +88,15 @@ def main():
             e.Update()
 
         updateIndex = 0
-        print(f"bullets {len(bulletList)}")
         for b in bulletList:
             b.Update()
+
+            # check if bullet has gone past top of screen
             outOfBounds = b.IsOutOfBounds()
             if outOfBounds:
-                del bulletList[updateIndex]
-                continue
+                del bulletList[updateIndex] # remove object from list
+                continue                    # go to next iteration of for loop
             updateIndex = updateIndex + 1
-
-
     
         # Graphical updates
             
