@@ -97,6 +97,12 @@ def main():
                 del bulletList[updateIndex] # remove object from list
                 continue                    # go to next iteration of for loop
             updateIndex = updateIndex + 1
+
+        # Check collisions
+
+        # Player collisions
+
+        # Bullet collisions
     
         # Graphical updates
             
