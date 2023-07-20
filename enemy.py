@@ -22,6 +22,7 @@ class Enemy:
         # Dimensions
         self.width = 60
         self.height = 40
+        self.collisionDistance = 25
         
         # surface details (for drawing and borders)
         self.windowWidth = windowWidth
@@ -38,6 +39,7 @@ class Enemy:
 
         self.color = color
 
+        # Points of polygon in counterclockwise order
         self.points = [(self.x+self.width/2, self.y+self.height/2), (self.x-self.width/2, self.y+self.height/2), (self.x-self.width/2, self.y-self.height/2), (self.x+self.width/2, self.y-self.height/2)]
 
     def UpdatePoints(self):

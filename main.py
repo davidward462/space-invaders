@@ -1,4 +1,5 @@
 import pygame
+import math
 import player
 import enemy
 import bullet
@@ -25,8 +26,30 @@ def LinesIntersect(lineA, lineB):
     return result
 
 # Return true if the two given objects have collided with one another, false otherwise.
+# TODO: make this use the points from the objects.
 def ObjectsCollide(objA, objB):
     result = False
+    Ax = objA.x
+    Ay = objA.y
+    Bx = objB.x
+    By = objB.y
+
+    # distance between object positions
+    a = Ax - Bx
+    b = Ay - By 
+    inner = (a**2) + (b**2)
+    distance = math.sqrt(inner)
+
+    radiusA = objA.collisionDistance
+    radiusB = objB.collisionDistance
+
+    radiusSum = radiusA + radiusB
+
+    if radiusSum >= distance:
+        result = True
+    else:
+        return False
+
     return result
 
 
@@ -34,9 +57,10 @@ def main():
 
     # Create player.
     playerObj = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
+    playerAlive = True
 
     # Create list of enemies that exist.
-    enemyList = enemy.SpawnEnemy(3, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    enemyList = enemy.SpawnEnemy(1, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # Create list of bullets that have been fired.
     bulletList = []
@@ -101,6 +125,11 @@ def main():
         # Check collisions
 
         # Player collisions
+        for e in enemyList:
+            if ObjectsCollide(playerObj, e):
+                playerAlive = False
+            else:
+                playerAlive = True
 
         # Bullet collisions
     
@@ -110,7 +139,8 @@ def main():
         window.fill(black)
 
         # update the entire display
-        playerObj.Draw()
+        if playerAlive:
+            playerObj.Draw()
 
         for e in enemyList:
             e.Draw()

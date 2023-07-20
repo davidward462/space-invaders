@@ -10,7 +10,8 @@ class Player:
 
         # Dimensions
         self.width = 40
-        self.height = 60
+        self.height = 50
+        self.collisionDistance = 20
         
         # surface details (for drawing and borders)
         self.windowWidth = windowWidth

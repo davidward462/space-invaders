@@ -13,6 +13,7 @@ class Bullet:
         #self.length = 10
         #self.width = 5
         self.radius = 5
+        self.collisionDistance = 5
 
         # surface details (for drawing and borders)
         self.windowWidth = windowWidth
@@ -25,7 +26,7 @@ class Bullet:
         self.horizDirection = 0
 
         # Intended speed of the player
-        self.maxSpeed = 1.0
+        self.maxSpeed = 1.1
 
         self.color = color
 
