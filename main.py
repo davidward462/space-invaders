@@ -111,6 +111,18 @@ def main():
         for e in enemyList:
             e.Update()
 
+        # Check collisions
+
+        # Player collisions
+        for e in enemyList:
+
+            # If player has collided with enemy
+            if ObjectsCollide(playerObj, e):
+                playerAlive = False
+            else:
+                playerAlive = True
+
+        # Bullet collisions
         updateIndex = 0
         for b in bulletList:
             b.Update()
@@ -121,17 +133,6 @@ def main():
                 del bulletList[updateIndex] # remove object from list
                 continue                    # go to next iteration of for loop
             updateIndex = updateIndex + 1
-
-        # Check collisions
-
-        # Player collisions
-        for e in enemyList:
-            if ObjectsCollide(playerObj, e):
-                playerAlive = False
-            else:
-                playerAlive = True
-
-        # Bullet collisions
     
         # Graphical updates
             
