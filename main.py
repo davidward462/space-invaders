@@ -112,6 +112,7 @@ def main():
             e.Update()
 
         # Check collisions
+        itemIndex = 0
 
         # Player collisions
         for e in enemyList:
@@ -123,16 +124,15 @@ def main():
                 playerAlive = True
 
         # Bullet collisions
-        updateIndex = 0
         for b in bulletList:
             b.Update()
 
             # check if bullet has gone past top of screen
             outOfBounds = b.IsOutOfBounds()
             if outOfBounds:
-                del bulletList[updateIndex] # remove object from list
+                del bulletList[itemIndex] # remove object from list
                 continue                    # go to next iteration of for loop
-            updateIndex = updateIndex + 1
+            itemIndex = itemIndex + 1
     
         # Graphical updates
             
