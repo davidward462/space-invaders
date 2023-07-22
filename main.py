@@ -114,8 +114,16 @@ def main():
         # Check collisions
         itemIndex = 0
 
-        # Player collisions
+        # Enemy collisions
         for e in enemyList:
+
+            # if enemy collides with bullet
+            for b in bulletList:
+
+                if ObjectsCollide(e, b):
+                    del enemyList[itemIndex]
+                    continue
+            itemIndex = itemIndex + 1
 
             # If player has collided with enemy
             if ObjectsCollide(playerObj, e):
@@ -124,6 +132,7 @@ def main():
                 playerAlive = True
 
         # Bullet collisions
+        itemIndex = 0
         for b in bulletList:
             b.Update()
 
