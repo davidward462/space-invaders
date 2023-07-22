@@ -73,6 +73,7 @@ def main():
     # game loop
     run = True
     while run:
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -80,22 +81,23 @@ def main():
 
             # when key is pressed down
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    playerObj.SetVertDirection(-1)
-                if event.key == pygame.K_a:
-                    playerObj.SetHorizDirection(-1)
-                if event.key == pygame.K_s:
-                    playerObj.SetVertDirection(1)
-                if event.key == pygame.K_d:
-                    playerObj.SetHorizDirection(1)
-                if event.key == pygame.K_SPACE:
-                    newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y-20, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
-                    bulletList.append(newBullet)
                 if event.key == pygame.K_r: # restart
                     main() # where does the previously allocated memory go?
                 if event.key == pygame.K_ESCAPE:
                     run = False
                     CloseProgram()
+                if playerObj.isAlive: # player control
+                    if event.key == pygame.K_w:
+                        playerObj.SetVertDirection(-1)
+                    if event.key == pygame.K_a:
+                        playerObj.SetHorizDirection(-1)
+                    if event.key == pygame.K_s:
+                        playerObj.SetVertDirection(1)
+                    if event.key == pygame.K_d:
+                        playerObj.SetHorizDirection(1)
+                    if event.key == pygame.K_SPACE:
+                        newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y-20, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
+                        bulletList.append(newBullet)
             
             # when key is released
             if event.type == pygame.KEYUP:
@@ -124,19 +126,15 @@ def main():
         # Enemy collisions
         for e in enemyList:
 
+            if ObjectsCollide(playerObj, e):
+                playerObj.isAlive = False
+
             # if enemy collides with bullet
             for b in bulletList:
-
                 if ObjectsCollide(e, b):
                     del enemyList[itemIndex]
                     continue
             itemIndex = itemIndex + 1
-
-            # If player has collided with enemy
-            if ObjectsCollide(playerObj, e):
-                playerAlive = False
-            else:
-                playerAlive = True
 
         # Bullet collisions
         itemIndex = 0
@@ -156,8 +154,7 @@ def main():
         window.fill(black)
 
         # update the entire display
-        if playerAlive:
-            playerObj.Draw()
+        playerObj.Draw()
 
         for e in enemyList:
             e.Draw()

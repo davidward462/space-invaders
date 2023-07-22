@@ -4,6 +4,8 @@ import math
 class Player:
 
     def __init__(self, x, y, color, windowWidth, windowHeight, surface):
+        self.isAlive = True
+
         # position on the screen
         self.x = x
         self.y = y
@@ -68,32 +70,33 @@ class Player:
     def BoundedY(self, cy):
         if cy < 1 + 15:
             cy = 1 + 15
-
         if cy > self.windowHeight - 15:
             cy = self.windowHeight - 15
         return cy
 
     # Perform logical updates to player
     def Update(self):
-        self.UpdateSpeed()
+        if self.isAlive:
+            self.UpdateSpeed()
 
-        cx = self.x
-        cy = self.y
-        vDir = self.vertDirection
-        hDir = self.horizDirection
+            cx = self.x
+            cy = self.y
+            vDir = self.vertDirection
+            hDir = self.horizDirection
 
-        # update position based on speed and direction
-        cx += hDir * self.maxSpeed * self.speed
-        cy += vDir * self.maxSpeed * self.speed
+            # update position based on speed and direction
+            cx += hDir * self.maxSpeed * self.speed
+            cy += vDir * self.maxSpeed * self.speed
 
-        # Keep new position within screen bounds
-        cx = self.BoundedX(cx)
-        cy = self.BoundedY(cy)
+            # Keep new position within screen bounds
+            cx = self.BoundedX(cx)
+            cy = self.BoundedY(cy)
 
-        self.x = cx
-        self.y = cy
+            self.x = cx
+            self.y = cy
 
     def Draw(self):
-        self.UpdatePoints()
-        pygame.draw.polygon(self.surface, self.color, self.points)
+        if self.isAlive:
+            self.UpdatePoints()
+            pygame.draw.polygon(self.surface, self.color, self.points)
 
