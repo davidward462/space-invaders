@@ -52,6 +52,11 @@ def ObjectsCollide(objA, objB):
 
     return result
 
+def CloseProgram():
+    print(" closing program...")
+    pygame.quit()
+    raise SystemExit
+
 
 def main():
 
@@ -60,7 +65,7 @@ def main():
     playerAlive = True
 
     # Create list of enemies that exist.
-    enemyList = enemy.SpawnEnemy(6, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    enemyList = enemy.SpawnEnemy(1, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # Create list of bullets that have been fired.
     bulletList = []
@@ -71,8 +76,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-                pygame.quit()
-                raise SystemExit
+                CloseProgram()
 
             # when key is pressed down
             if event.type == pygame.KEYDOWN:
@@ -89,6 +93,9 @@ def main():
                     bulletList.append(newBullet)
                 if event.key == pygame.K_r: # restart
                     main() # where does the previously allocated memory go?
+                if event.key == pygame.K_ESCAPE:
+                    run = False
+                    CloseProgram()
             
             # when key is released
             if event.type == pygame.KEYUP:
