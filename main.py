@@ -6,6 +6,11 @@ import bullet
 import random
 
 pygame.init()
+pygame.font.init()
+
+# For debugging
+print(f"pygame initialized = {pygame.get_init()}")
+print(f"fonts initialized = {pygame.font.get_init()}")
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 800
@@ -54,6 +59,7 @@ def ObjectsCollide(objA, objB):
 
 def CloseProgram():
     print(" closing program...")
+    pygame.font.quit()
     pygame.quit()
     raise SystemExit
 
