@@ -12,6 +12,13 @@ pygame.font.init()
 print(f"pygame initialized = {pygame.get_init()}")
 print(f"fonts initialized = {pygame.font.get_init()}")
 
+# Fonts
+defaultFont = pygame.font.get_default_font()
+print(f"default font = {defaultFont}")
+
+fontList = pygame.font.get_fonts()
+print(f"available fonts: {fontList}")
+
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 800
 
@@ -75,6 +82,8 @@ def main():
 
     # Create list of bullets that have been fired.
     bulletList = []
+
+    deathFont = pygame.font.SysFont('freesansbold', 12)
 
     # game loop
     run = True
