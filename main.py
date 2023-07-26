@@ -5,15 +5,11 @@ import enemy
 import bullet
 import random
 
+# Initialize pygame systems
 pygame.init()
 pygame.font.init()
 
 debug = False
-
-# For debugging
-if debug:
-    print(f"pygame initialized = {pygame.get_init()}")
-    print(f"fonts initialized = {pygame.font.get_init()}")
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 800
