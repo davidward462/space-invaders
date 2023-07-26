@@ -17,7 +17,7 @@ defaultFont = pygame.font.get_default_font()
 print(f"default font = {defaultFont}")
 
 fontList = pygame.font.get_fonts()
-print(f"available fonts: {fontList}")
+#print(f"available fonts: {fontList}")
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 800
@@ -31,6 +31,7 @@ pygame.display.set_icon(icon)
 # constants
 white = (255, 255, 255)
 black = (0, 0, 0)
+blue = (0, 0, 128)
 
 # Return true if the two given lines cross one another, false otherwise
 def LinesIntersect(lineA, lineB):
@@ -83,7 +84,14 @@ def main():
     # Create list of bullets that have been fired.
     bulletList = []
 
-    deathFont = pygame.font.SysFont('freesansbold', 12)
+    # Create font that displays on player death
+    deathFont = pygame.font.SysFont('freesansbold', 32)
+
+    # Create text surface object
+    text = deathFont.render('You died.', True, white, black)
+
+    textRectangle = text.get_rect()
+    textRectangle.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
     # game loop
     run = True
@@ -171,12 +179,19 @@ def main():
         # update the entire display
         playerObj.Draw()
 
+        # Draw all enemies
         for e in enemyList:
             e.Draw()
 
+        # Draw all bullets
         for b in bulletList:
             b.Draw()
             
+        if not playerObj.isAlive:
+            # If player is dead, copy text surface to display surface
+            window.blit(text, textRectangle)
+
+        # Update display
         pygame.display.flip()
 
 main()
