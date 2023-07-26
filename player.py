@@ -30,6 +30,8 @@ class Player:
         # Current speed
         self.speed = 1
 
+        # Other details
+        self.gunCooldown = 360
         self.color = color
 
         # corners of the polygon
