@@ -8,16 +8,12 @@ import random
 pygame.init()
 pygame.font.init()
 
+debug = False
+
 # For debugging
-print(f"pygame initialized = {pygame.get_init()}")
-print(f"fonts initialized = {pygame.font.get_init()}")
-
-# Fonts
-defaultFont = pygame.font.get_default_font()
-print(f"default font = {defaultFont}")
-
-fontList = pygame.font.get_fonts()
-#print(f"available fonts: {fontList}")
+if debug:
+    print(f"pygame initialized = {pygame.get_init()}")
+    print(f"fonts initialized = {pygame.font.get_init()}")
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 800
@@ -66,7 +62,6 @@ def ObjectsCollide(objA, objB):
     return result
 
 def CloseProgram():
-    print(" closing program...")
     pygame.font.quit()
     pygame.quit()
     raise SystemExit
@@ -76,7 +71,7 @@ def main():
 
     # Create player.
     playerObj = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
-    playerAlive = True
+    playerWin = False
 
     # Create list of enemies that exist.
     enemyList = enemy.SpawnEnemy(5, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
@@ -87,11 +82,20 @@ def main():
     # Create font that displays on player death
     deathFont = pygame.font.SysFont('freesansbold', 32)
 
-    # Create text surface object
-    text = deathFont.render('You died.', True, white, black)
+    # Create font that displays when player wins
+    winFont = pygame.font.SysFont('freesansbold', 32)
 
-    textRectangle = text.get_rect()
-    textRectangle.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+    # Create text surface object
+    deathText = deathFont.render('You died.', True, white, black)
+
+    # Create text surface object
+    winText = winFont.render('You win!', True, white, black)
+
+    deathTextRec = deathText.get_rect()
+    deathTextRec.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
+
+    winTextRect = winText.get_rect()
+    winTextRect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
     # game loop
     run = True
@@ -170,6 +174,10 @@ def main():
                 del bulletList[itemIndex] # remove object from list
                 continue                    # go to next iteration of for loop
             itemIndex = itemIndex + 1
+
+        # Player wins if all enemies are destroyed
+        if len(enemyList) == 0:
+            playerWin = True
     
         # Graphical updates
             
@@ -189,7 +197,11 @@ def main():
             
         if not playerObj.isAlive:
             # If player is dead, copy text surface to display surface
-            window.blit(text, textRectangle)
+            window.blit(deathText, deathTextRec)
+
+        if playerWin:
+            # If player wins, copy text surface to display surface
+            window.blit(winText, winTextRect)
 
         # Update display
         pygame.display.flip()
