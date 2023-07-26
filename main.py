@@ -68,10 +68,11 @@ def main():
 
     # Create player.
     playerObj = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
-    playerWin = False
+    gameWin = False
+    gunHeat = 0
 
     # Create list of enemies that exist.
-    enemyList = enemy.SpawnEnemy(5, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    enemyList = enemy.SpawnEnemy(10, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # Create list of bullets that have been fired.
     bulletList = []
@@ -97,6 +98,9 @@ def main():
     # game loop
     while run:
 
+        # TODO: make sure this value does not overflow
+        gunHeat = gunHeat - 1
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -119,8 +123,10 @@ def main():
                     if event.key == pygame.K_d:
                         playerObj.SetHorizDirection(1)
                     if event.key == pygame.K_SPACE:
-                        newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y-20, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
-                        bulletList.append(newBullet)
+                        if gunHeat < 1:
+                            newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y-20, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
+                            bulletList.append(newBullet)
+                            gunHeat = playerObj.gunCooldown
             
             # when key is released
             if event.type == pygame.KEYUP:
@@ -175,7 +181,7 @@ def main():
 
         # Player wins if all enemies are destroyed
         if len(enemyList) == 0:
-            playerWin = True
+            gameWin = True
     
         # Graphical updates
             
@@ -197,7 +203,7 @@ def main():
             # If player is dead, copy text surface to display surface
             window.blit(deathText, deathTextRec)
 
-        if playerWin:
+        if gameWin:
             # If player wins, copy text surface to display surface
             window.blit(winText, winTextRect)
 
