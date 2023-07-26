@@ -68,6 +68,7 @@ def CloseProgram():
 
 
 def main():
+    run = True
 
     # Create player.
     playerObj = player.Player(400, 500, white, WINDOW_WIDTH, WINDOW_HEIGHT, window)
@@ -98,7 +99,6 @@ def main():
     winTextRect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
     # game loop
-    run = True
     while run:
 
         for event in pygame.event.get():
@@ -148,9 +148,10 @@ def main():
             e.Update()
 
         # Check collisions
-        itemIndex = 0
 
         # Enemy collisions
+        enemyIndex = 0
+        bulletIndex = 0
         for e in enemyList:
 
             if ObjectsCollide(playerObj, e):
@@ -159,21 +160,22 @@ def main():
             # if enemy collides with bullet
             for b in bulletList:
                 if ObjectsCollide(e, b):
-                    del enemyList[itemIndex]
+                    del enemyList[enemyIndex]
+                    del bulletList[bulletIndex]
                     continue
-            itemIndex = itemIndex + 1
+            enemyIndex = enemyIndex + 1
 
         # Bullet collisions
-        itemIndex = 0
+        bulletIndex = 0
         for b in bulletList:
             b.Update()
 
             # check if bullet has gone past top of screen
             outOfBounds = b.IsOutOfBounds()
             if outOfBounds:
-                del bulletList[itemIndex] # remove object from list
+                del bulletList[bulletIndex] # remove object from list
                 continue                    # go to next iteration of for loop
-            itemIndex = itemIndex + 1
+            bulletIndex = bulletIndex + 1
 
         # Player wins if all enemies are destroyed
         if len(enemyList) == 0:
