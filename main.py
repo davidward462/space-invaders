@@ -18,7 +18,7 @@ WINDOW_WIDTH = 800
 window = pygame.display.set_mode( (WINDOW_WIDTH, WINDOW_HEIGHT) )
 
 pygame.display.set_caption("Space Invaders")
-icon = pygame.image.load('favicon.ico')
+icon = pygame.image.load('images/favicon.ico')
 pygame.display.set_icon(icon)
 
 # constants
@@ -100,17 +100,17 @@ def main():
     # Sounds
 
     # https://freesound.org/s/73537/
-    shootSound = pygame.mixer.Sound('laser.wav')
+    shootSound = pygame.mixer.Sound('sounds/laser.wav')
 
     # https://freesound.org/s/403296/
-    playerDeathSound = pygame.mixer.Sound('shipExplosion.wav')
+    playerDeathSound = pygame.mixer.Sound('sounds/shipExplosion.wav')
     deathSoundPlayed = False
 
     # https://freesound.org/s/441497/
-    enemyDeathSound = pygame.mixer.Sound('enemyExplosion.wav')
+    enemyDeathSound = pygame.mixer.Sound('sounds/enemyExplosion.wav')
 
     # https://freesound.org/s/528958/
-    gameCompleteSound = pygame.mixer.Sound('complete.wav')
+    gameCompleteSound = pygame.mixer.Sound('sounds/complete.wav')
     gameWinSoundPlayed = False
 
     # game loop
