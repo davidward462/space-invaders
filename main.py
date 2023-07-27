@@ -8,6 +8,7 @@ import random
 # Initialize pygame systems
 pygame.init()
 pygame.font.init()
+pygame.mixer.init()
 
 debug = False
 
@@ -59,6 +60,7 @@ def ObjectsCollide(objA, objB):
 
 def CloseProgram():
     pygame.font.quit()
+    pygame.mixer.quit()
     pygame.quit()
     raise SystemExit
 
@@ -95,6 +97,9 @@ def main():
     winTextRect = winText.get_rect()
     winTextRect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
+    # Sounds
+    shootSound = pygame.mixer.Sound('laser.wav')
+
     # game loop
     while run:
 
@@ -127,6 +132,7 @@ def main():
                             newBullet = bullet.SpawnBullet(playerObj.x, playerObj.y-20, white, WINDOW_WIDTH,WINDOW_HEIGHT,window)
                             bulletList.append(newBullet)
                             gunHeat = playerObj.gunCooldown
+                            shootSound.play()
             
             # when key is released
             if event.type == pygame.KEYUP:
