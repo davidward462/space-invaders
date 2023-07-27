@@ -98,7 +98,16 @@ def main():
     winTextRect.center = (WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2)
 
     # Sounds
+
+    # https://freesound.org/s/73537/
     shootSound = pygame.mixer.Sound('laser.wav')
+
+    # https://freesound.org/s/403296/
+    playerDeathSound = pygame.mixer.Sound('shipExplosion.wav')
+    deathSoundPlayed = False
+
+    # https://freesound.org/s/441497/
+    enemyExplosion = pygame.mixer.Sound('enemyExplosion.wav')
 
     # game loop
     while run:
@@ -169,6 +178,7 @@ def main():
             for b in bulletList:
                 if ObjectsCollide(e, b):
                     del enemyList[enemyIndex]
+                    enemyExplosion.play()
                     del bulletList[bulletIndex]
                     continue
             enemyIndex = enemyIndex + 1
@@ -208,6 +218,9 @@ def main():
         if not playerObj.isAlive:
             # If player is dead, copy text surface to display surface
             window.blit(deathText, deathTextRec)
+            if not deathSoundPlayed:
+                playerDeathSound.play()
+                deathSoundPlayed = True
 
         if gameWin:
             # If player wins, copy text surface to display surface
