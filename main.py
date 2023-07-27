@@ -74,7 +74,7 @@ def main():
     gunHeat = 0
 
     # Create list of enemies that exist.
-    enemyList = enemy.SpawnEnemy(10, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    enemyList = enemy.SpawnEnemy(8, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # Create list of bullets that have been fired.
     bulletList = []
@@ -107,7 +107,11 @@ def main():
     deathSoundPlayed = False
 
     # https://freesound.org/s/441497/
-    enemyExplosion = pygame.mixer.Sound('enemyExplosion.wav')
+    enemyDeathSound = pygame.mixer.Sound('enemyExplosion.wav')
+
+    # https://freesound.org/s/528958/
+    gameCompleteSound = pygame.mixer.Sound('complete.wav')
+    gameWinSoundPlayed = False
 
     # game loop
     while run:
@@ -178,7 +182,7 @@ def main():
             for b in bulletList:
                 if ObjectsCollide(e, b):
                     del enemyList[enemyIndex]
-                    enemyExplosion.play()
+                    enemyDeathSound.play()
                     del bulletList[bulletIndex]
                     continue
             enemyIndex = enemyIndex + 1
@@ -225,6 +229,9 @@ def main():
         if gameWin:
             # If player wins, copy text surface to display surface
             window.blit(winText, winTextRect)
+            if not gameWinSoundPlayed:
+                gameCompleteSound.play()
+                gameWinSoundPlayed = True
 
         # Update display
         pygame.display.flip()
