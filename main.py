@@ -74,7 +74,7 @@ def main():
     gunHeat = 0
 
     # Create list of enemies that exist.
-    enemyList = enemy.SpawnEnemy(8, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    enemyList = enemy.SpawnEnemy(2, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # Create list of bullets that have been fired.
     bulletList = []
