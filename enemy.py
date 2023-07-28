@@ -6,9 +6,13 @@ def SpawnEnemy(number, window_Width, window_Height, window, color):
     enemyList = []
     for i in range(0, number):
         enemyX = random.randint(20, window_Width-20)
-        enemyY = random.randint(20, window_Height/10)
+        enemyY = random.randint(20, window_Height/3)
         e = Enemy(enemyX, enemyY, color, window_Width, window_Height, window)
-        e.SetHorizDirection(-1)
+
+        values = [1, -1]
+        direction = random.choice(values)
+
+        e.SetHorizDirection(direction)
         enemyList.append(e)
     return enemyList
 
