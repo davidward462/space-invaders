@@ -67,7 +67,7 @@ class Enemy:
         # check if enemy should bounce
         if cx < 0 or cx >= self.windowWidth:
             hDir *= -1
-            cy += 30
+            cy += 35
 
         # update position based on speed and direction
         cx += hDir * self.maxSpeed
