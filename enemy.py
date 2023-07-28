@@ -11,8 +11,10 @@ def SpawnEnemy(number, window_Width, window_Height, window, color):
 
         values = [1, -1]
         direction = random.choice(values)
-
         e.SetHorizDirection(direction)
+
+        e.SetRandomSpeed(0.2, 0.4)
+
         enemyList.append(e)
     return enemyList
 
@@ -51,6 +53,9 @@ class Enemy:
 
     def SetHorizDirection(self, dir):
         self.horizDirection = dir
+        
+    def SetRandomSpeed(self, minimum, maximum):
+        self.maxSpeed = random.uniform(minimum, maximum)
 
     def Update(self):
 
