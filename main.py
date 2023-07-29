@@ -117,6 +117,9 @@ def main():
     gameCompleteSound = pygame.mixer.Sound('sounds/complete.wav')
     gameWinSoundPlayed = False
 
+    # https://freesound.org/s/361265/
+    bombSound = pygame.mixer.Sound('sounds/bomb.wav')
+
     # game loop
     while run:
 
@@ -186,6 +189,7 @@ def main():
                 newBomb = bomb.SpawnBomb(e.x, e.y, white, WINDOW_HEIGHT, WINDOW_WIDTH, window)
                 e.SetRandomTimer()
                 bombList.append(newBomb)
+                bombSound.play()
 
             if ObjectsCollide(playerObj, e):
                 playerObj.isAlive = False
