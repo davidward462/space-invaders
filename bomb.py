@@ -33,7 +33,7 @@ class Bomb:
         result = False
         cx = self.x
         cy = self.y
-        if cy < windowHeight:
+        if cy > self.windowHeight:
             result = True
         return result
 

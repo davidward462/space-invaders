@@ -219,10 +219,18 @@ def main():
         for bo in bombList:
             bo.Update()
 
+            outOfBounds = bo.IsOutOfBounds()
+            if outOfBounds:
+                del bombList[bombIndex] # remove object from list
+                continue                    # go to next iteration of for loop
+
             bombIndex = bombIndex + 1
 
         # Player wins if all enemies are destroyed
         if len(enemyList) == 0:
+            index = 0
+            for bo in bombList:
+                del bombList[index]
             gameWin = True
     
         # Graphical updates
