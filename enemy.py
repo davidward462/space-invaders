@@ -64,7 +64,7 @@ class Enemy:
         self.maxSpeed = random.uniform(minimum, maximum)
 
     def SetRandomTimer(self):
-        self.bombTimer = random.randint(500, 1000)
+        self.bombTimer = random.randint(500, 2000)
 
     def Update(self):
         

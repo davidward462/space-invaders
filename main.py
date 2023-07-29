@@ -75,7 +75,7 @@ def main():
     gunHeat = 0
 
     # Create list of enemies that exist.
-    enemyList = enemy.SpawnEnemy(2, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
+    enemyList = enemy.SpawnEnemy(5, WINDOW_WIDTH, WINDOW_HEIGHT, window, white)
 
     # Create list of bullets that have been fired.
     bulletList = []
@@ -117,7 +117,7 @@ def main():
     gameCompleteSound = pygame.mixer.Sound('sounds/complete.wav')
     gameWinSoundPlayed = False
 
-    # https://freesound.org/s/361265/
+    # edited version of laser.wav
     bombSound = pygame.mixer.Sound('sounds/bomb.wav')
 
     # game loop
