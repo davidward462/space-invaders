@@ -179,7 +179,6 @@ def main():
         # Enemy update and collisions
         enemyIndex = 0
         bulletIndex = 0
-        bombIndex = 0
 
         for e in enemyList:
             e.Update() # update position
@@ -216,13 +215,19 @@ def main():
             bulletIndex = bulletIndex + 1
 
         # Bomb update and collisions
+        bombIndex = 0
         for bo in bombList:
             bo.Update()
+
+            if ObjectsCollide(playerObj, bo):
+                playerObj.isAlive = False
+                del bombList[bombIndex] # remove object from list
+                continue                # go to next iteration of for loop
 
             outOfBounds = bo.IsOutOfBounds()
             if outOfBounds:
                 del bombList[bombIndex] # remove object from list
-                continue                    # go to next iteration of for loop
+                continue                # go to next iteration of for loop
 
             bombIndex = bombIndex + 1
 
