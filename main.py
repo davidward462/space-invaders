@@ -166,7 +166,7 @@ def main():
                     if playerObj.horizDirection == 1:
                         playerObj.SetHorizDirection(0)
 
-        # Logic updates
+        # Logic updates and collisions
 
         # Update player
         playerObj.Update()
@@ -176,8 +176,16 @@ def main():
         # Enemy update and collisions
         enemyIndex = 0
         bulletIndex = 0
+        bombIndex = 0
+
         for e in enemyList:
-            e.Update()
+            e.Update() # update position
+
+            if e.bombTimer < 1:
+                # spawn bomb
+                newBomb = bomb.SpawnBomb(e.x, e.y, white, WINDOW_HEIGHT, WINDOW_WIDTH, window)
+                e.SetRandomTimer()
+                bombList.append(newBomb)
 
             if ObjectsCollide(playerObj, e):
                 playerObj.isAlive = False
@@ -191,10 +199,10 @@ def main():
                     continue
             enemyIndex = enemyIndex + 1
 
-        # Bullet collisions
+        # Bullet update and collisions
         bulletIndex = 0
         for b in bulletList:
-            b.Update()
+            b.Update() # update position
 
             # check if bullet has gone past top of screen
             outOfBounds = b.IsOutOfBounds()
@@ -202,6 +210,12 @@ def main():
                 del bulletList[bulletIndex] # remove object from list
                 continue                    # go to next iteration of for loop
             bulletIndex = bulletIndex + 1
+
+        # Bomb update and collisions
+        for bo in bombList:
+            bo.Update()
+
+            bombIndex = bombIndex + 1
 
         # Player wins if all enemies are destroyed
         if len(enemyList) == 0:
@@ -222,6 +236,10 @@ def main():
         # Draw all bullets
         for b in bulletList:
             b.Draw()
+
+        # Draw all bombs
+        for bo in bombList:
+            bo.Draw()
             
         if not playerObj.isAlive:
             # If player is dead, copy text surface to display surface

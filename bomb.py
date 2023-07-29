@@ -25,7 +25,7 @@ class Bomb:
         self.horizDirection = 0
 
         # Intended speed of the bomb
-        self.maxSpeed = 1.0
+        self.maxSpeed = 0.5
 
         self.color = color
 
