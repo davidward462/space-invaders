@@ -15,6 +15,7 @@ def SpawnEnemy(number, window_Width, window_Height, window, color):
 
         e.SetRandomSpeed(0.2, 0.4)
         e.SetRandomTimer()
+        e.isBomber = bool(random.getrandbits(1)) # random true or false
 
         enemyList.append(e)
     return enemyList
@@ -46,6 +47,8 @@ class Enemy:
 
         self.color = color
 
+        # Bombing system
+        self.isBomber = False
         self.bombTimer = 400
 
         # Points of polygon in counterclockwise order
@@ -61,11 +64,12 @@ class Enemy:
         self.maxSpeed = random.uniform(minimum, maximum)
 
     def SetRandomTimer(self):
-        self.bombTimer = random.randint(400, 4000)
+        self.bombTimer = random.randint(500, 1000)
 
     def Update(self):
         
-        self.bombTimer = self.bombTimer - 1
+        if self.isBomber:
+            self.bombTimer = self.bombTimer - 1
 
         cx = self.x
         cy = self.y
