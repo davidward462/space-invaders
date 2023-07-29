@@ -1,9 +1,10 @@
 import pygame
 import math
+import random
 import player
 import enemy
 import bullet
-import random
+import bomb
 
 # Initialize pygame systems
 pygame.init()
@@ -78,6 +79,9 @@ def main():
 
     # Create list of bullets that have been fired.
     bulletList = []
+
+    # Create a list of bullets that have been droped
+    bombList = []
 
     # Create font that displays on player death
     deathFont = pygame.font.SysFont('freesansbold', 32)
@@ -163,17 +167,17 @@ def main():
                         playerObj.SetHorizDirection(0)
 
         # Logic updates
+
+        # Update player
         playerObj.Update()
         
-        for e in enemyList:
-            e.Update()
-
         # Check collisions
 
-        # Enemy collisions
+        # Enemy update and collisions
         enemyIndex = 0
         bulletIndex = 0
         for e in enemyList:
+            e.Update()
 
             if ObjectsCollide(playerObj, e):
                 playerObj.isAlive = False
